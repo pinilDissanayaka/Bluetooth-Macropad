@@ -53,5 +53,5 @@ This project is licensed under the MIT License.
 Contributions are welcome! 
 
 ## Credits
-[ESP32 BLE Keyboard Library](https://github.com/T-vK/ESP32-BLE-Keyboard): Developed by T-vK, available at ESP32 BLE Keyboard Library.
-[Adafruit NeoPixel Library](https://github.com/adafruit/Adafruit_NeoPixel): Developed by Adafruit Industries, available at Adafruit NeoPixel Library.
+- [ESP32 BLE Keyboard Library](https://github.com/T-vK/ESP32-BLE-Keyboard): Developed by T-vK, available at ESP32 BLE Keyboard Library.
+- [Adafruit NeoPixel Library](https://github.com/adafruit/Adafruit_NeoPixel): Developed by Adafruit Industries, available at Adafruit NeoPixel Library.
