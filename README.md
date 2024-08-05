@@ -27,14 +27,14 @@ This repository contains the firmware and configuration files for a customizable
 ## Installation
 1. Clone the Repository:
 ```
-git clone https://github.com/yourusername/Customizable-Bluetooth-Macropad-ESP32.git
+git clone https://github.com/pinilDissanayaka/Bluetooth-Macropad.git
 ```
 2. Open Arduino IDE:
 - Install the ESP32 board support if you haven’t already.
 - Add the Adafruit NeoPixel library and ESP32 BLE Keyboard library to your Arduino IDE.
 
 4. Upload Firmware:
-- Open the macropad.ino file in the Arduino IDE.
+- Open the HIDBleKeboard.ino file in the Arduino IDE.
 - Select the appropriate ESP32 board and port.
 - Click "Upload" to flash the firmware onto your ESP32.
 
