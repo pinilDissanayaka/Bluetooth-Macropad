@@ -4,6 +4,7 @@
 #include <Encoder.h>
 #include <Bounce2.h>
 #include <Pangodream_18650_CL.h>
+#include <Adafruit_NeoPixel.h>
 
 //Encoder
 int SW = 19;
@@ -14,8 +15,6 @@ Bounce encoderButton = Bounce(SW,10);
 int timeLimit = 500;
 long oldPosition = -999;
 
-
-int batteryLevel = 100;
 //#define ADC_PIN 34
 //#define CONV_FACTOR 1.7
 //#define READS 20
@@ -36,25 +35,37 @@ byte rowPins[ROWS] = {9, 8, 7, 6};
 byte colPins[COLS] = {5, 4, 3, 2}; 
 
 Keypad customKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); 
-BleKeyboard bleKeyboard("Macropad", "Espressif", batteryLevel);
+BleKeyboard bleKeyboard("Macropad", "Pinil", 0);
 Pangodream_18650_CL BL;
 //Pangodream_18650_CL BL(ADC_PIN, CONV_FACTOR, READS);
+
+
+#define PIXEL_PIN 5   
+#define NUMPIXELS 41
+byte selectedEffect = 0; 
+Adafruit_NeoPixel strip(NUMPIXELS, PIXEL_PIN, NEO_GRB + NEO_KHZ800); 
+
 
 void setup() {
   Serial.begin(115200);
   Serial.println("Starting BLE work!");
   pinMode(CLK, INPUT_PULLUP);
+
   //Consumer.begin();
   bleKeyboard.begin();
+  strip.begin();
+  strip.show();
 }
 
 
 void loop() {
 
   if (bleKeyboard.isConnected()) {
+    getBatteryLevel();
     char customKey = customKeypad.getKey();
 
     checkEncoder();
+    layout1(customKey);
 
     delay(2000);
   }
@@ -68,10 +79,10 @@ void getBatteryLevel(){
   Serial.print("Volts: ");
   Serial.println(BL.getBatteryVolts());
   Serial.print("Charge level: ");
-  batteryLevel = BL.getBatteryChargeLevel();
-  Serial.println(batteryLevel);
+  Serial.println(BL.getBatteryChargeLevel());
+  bleKeyboard.setBatteryLevel(BL.getBatteryChargeLevel());
   Serial.println("");
-  delay(1000);
+  delay(10);
 }
 
 void changeStateUp(){
