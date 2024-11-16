@@ -1,13 +1,13 @@
-void set_volume_up(){
-    Serial.println("Sending Vol UP media key...");
+void set_volume(){
+  if (previousEncoderCount < (int32_t)encoder.getCount()) {
     bleKeyboard.write(KEY_MEDIA_VOLUME_UP);
-    delay(1000);
-    bleKeyboard.releaseAll();
-}
+    previousEncoderCount = (int32_t)encoder.getCount();
+  }
 
-void set_volume_down(){
-  Serial.println("Sending Vol DOWN media key...");
-  bleKeyboard.write(KEY_MEDIA_VOLUME_DOWN);
-  delay(1000);
+  if (previousEncoderCount > (int32_t)encoder.getCount()) {
+    bleKeyboard.write(KEY_MEDIA_VOLUME_DOWN);
+    previousEncoderCount = (int32_t)encoder.getCount();
+  }
+  delay(100);
   bleKeyboard.releaseAll();
 }
